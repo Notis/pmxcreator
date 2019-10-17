@@ -1,0 +1,22 @@
+[Unit]
+Description=RunOnceSetupProxmoxScript
+Wants=network-online.target
+After=pve-manager.service
+After=network-online.target
+# all remote filesystems (NFS/_netdev) are mounted
+After=remote-fs.target
+# name (DNS) and user resolution from remote databases (AD/LDAP) are available
+After=nss-user-lookup.target nss-lookup.target
+# the system clock has synchronized
+After=time-sync.target
+After=iscsi.service
+After=ceph-fuse.target
+
+[Service]
+#Environment=
+Type=oneshot
+ExecStart=/bin/bash /opt/install/runpmx.sh
+
+
+[Install]
+WantedBy=multi-user.target

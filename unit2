@@ -1,0 +1,21 @@
+[Unit]
+Description=RunOnceSetupProxmoxScript
+Wants=network-online.target
+Wants=pve-manager.service
+After=network-online.target
+# all remote filesystems (NFS/_netdev) are mounted
+After=remote-fs.target
+# name (DNS) and user resolution from remote databases (AD/LDAP) are available
+After=nss-user-lookup.target nss-lookup.target
+# the system clock has synchronized
+After=time-sync.target
+After=iscsi.service
+After=ceph-fuse.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/install/createvm.sh
+
+
+[Install]
+WantedBy=multi-user.target
