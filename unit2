@@ -1,7 +1,7 @@
 [Unit]
 Description=RunOnceSetupProxmoxScript
 Wants=network-online.target
-Wants=pve-manager.service
+After=pve-manager.service
 After=network-online.target
 # all remote filesystems (NFS/_netdev) are mounted
 After=remote-fs.target
@@ -13,8 +13,9 @@ After=iscsi.service
 After=ceph-fuse.target
 
 [Service]
+#Environment=
 Type=oneshot
-ExecStart=/opt/install/createvm.sh
+ExecStart=/bin/bash /opt/install/createvm.sh
 
 
 [Install]
