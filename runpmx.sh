@@ -18,7 +18,7 @@ destroy_unit () {
 	}
 #------------
  
-/usr/bin/apt-get install -y curl || echo $? > /opt/err.log
+/usr/bin/apt-get install -y curl jq || echo $? > /opt/err.log
 
 cp /etc/hosts /opt/hosts.bck
 echo "127.0.0.1	localhost localhost.localdomain" > /opt/hosts
